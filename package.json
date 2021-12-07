@@ -9,8 +9,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"**/*.{json,css,graphql,yaml}\"",
-    "format:check": "prettier --check \"**/*.{json,css,graphql,yaml}\""
+    "format": "prettier --write \"**/*.{js,json,css,graphql,yaml}\"",
+    "format:check": "prettier --check \"**/*.{js,json,css,graphql,yaml}\"",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,11 @@
     "eslint": "8.4.1",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
     "prettier": "^2.5.1"
+  },
+  "lint-staged": {
+    "*.{js,json,css,graphql,yaml}": "prettier --write"
   }
 }
