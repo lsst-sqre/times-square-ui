@@ -8,7 +8,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{json,css,graphql,yaml}\"",
+    "format:check": "prettier --check \"**/*.{json,css,graphql,yaml}\""
   },
   "repository": {
     "type": "git",
@@ -21,7 +23,10 @@
   },
   "homepage": "https://github.com/lsst-sqre/times-square-ui#readme",
   "eslintConfig": {
-    "extends": "next/core-web-vitals"
+    "extends": [
+      "next/core-web-vitals",
+      "prettier"
+    ]
   },
   "dependencies": {
     "next": "^12.0.7",
@@ -30,6 +35,8 @@
   },
   "devDependencies": {
     "eslint": "8.4.1",
-    "eslint-config-next": "12.0.7"
+    "eslint-config-next": "12.0.7",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.5.1"
   }
 }
