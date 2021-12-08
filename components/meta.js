@@ -1,11 +1,9 @@
+import getConfig from 'next/config';
 import Head from 'next/head';
 
 const Meta = () => {
-  // const { publicRuntimeConfig } = getConfig();
-  // const { siteName, siteDescription } = publicRuntimeConfig;
-
-  const siteName = 'Times Square';
-  const siteDescription = 'Notebook viewing service';
+  const { publicRuntimeConfig } = getConfig();
+  const { siteName, siteDescription } = publicRuntimeConfig;
 
   return (
     <Head>
