@@ -35,10 +35,15 @@ const readPublicYamlConfig = () => {
 
 module.exports = (phase, { defaultConfig }) => {
   const publicYamlConfig = readPublicYamlConfig();
+  const basePath = '/times-square';
 
   const config = {
     ...defaultConfig,
-    publicRuntimeConfig: { ...publicYamlConfig },
+    basePath,
+    publicRuntimeConfig: {
+      ...publicYamlConfig,
+      basePath,
+    },
   };
   return config;
 };

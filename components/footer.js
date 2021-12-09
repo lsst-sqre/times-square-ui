@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
+import getConfig from 'next/config';
 
 import { ContentMaxWidth } from '../styles/sizes';
 
@@ -46,6 +47,8 @@ const FooterNav = styled.nav`
  * Footer component (contained within a Page component).
  */
 export default function Footer() {
+  const { publicRuntimeConfig } = getConfig();
+  const { basePath } = publicRuntimeConfig;
   return (
     <StyledFooter>
       <div className="content">
@@ -71,7 +74,7 @@ export default function Footer() {
           <Image
             alt="Logos for NSF, NOIRLab, AURA, SLAC, and DOE."
             className="u-invertable-image"
-            src="/operations-lineup-black.png"
+            src={`${basePath}/operations-lineup-black.png`}
             width="800px"
             height="158px"
           />

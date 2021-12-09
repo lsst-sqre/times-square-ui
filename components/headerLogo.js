@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import getConfig from 'next/config';
 
 import { useCurrentUrl } from '../hooks/currentUrl';
 
@@ -12,10 +13,13 @@ export default function HeaderLogo() {
   const currentUrl = useCurrentUrl();
   const homepage = new URL('/', currentUrl);
 
+  const { publicRuntimeConfig } = getConfig();
+  const { basePath } = publicRuntimeConfig;
+
   return (
     <a href={homepage.href}>
       <Image
-        src="/rubin-imagotype-color-on-black.svg"
+        src={`${basePath}/rubin-imagotype-color-on-black.svg`}
         alt="Rubin Observatory Logo"
         height={logoHeightPx}
         width={logoWidthPx}
