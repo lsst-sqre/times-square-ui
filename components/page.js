@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import MainContent from './mainContent';
 import Footer from './footer';
 import Meta from './meta';
+import Header from './header';
 
 /*
  * Layout wrapper div.
@@ -35,6 +36,7 @@ export default function Page({ children }) {
     <StyledLayout>
       <Meta />
       <div className="upper-container">
+        <Header />
         <MainContent>{children}</MainContent>
       </div>
       <div className="sticky-footer-container">

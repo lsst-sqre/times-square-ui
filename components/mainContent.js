@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ContentMaxWidth } from '../styles/sizes';
 
 const StyledMain = styled.main`
-  margin: 0 auto;
+  margin: 1rem auto;
   max-width: ${ContentMaxWidth};
   padding: 0 var(--size-screen-padding-min);
 
