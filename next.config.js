@@ -44,6 +44,17 @@ module.exports = (phase, { defaultConfig }) => {
       ...publicYamlConfig,
       basePath,
     },
+    async rewrites() {
+      // For both the source and destination, don't include the basePath
+      // prefix for internal (same host) paths; next will apply it
+      // automatically.
+      return [
+        {
+          source: '/api/v1/pages/:page/html',
+          destination: '/api/dev/times-square/v1/pages/:page/html',
+        },
+      ];
+    },
   };
   return config;
 };
