@@ -40,7 +40,8 @@ function TSNotebookViewer({ nbSlug, userParameters }) {
   const { status, error, data } = useFetch(pageDataUrl);
 
   if (status === 'fetched') {
-    const { parameters } = data;
+    const { parameters, html_url: htmlApiUrl } = data;
+    console.log(htmlApiUrl);
 
     // Merge user-set parameters with defaults
     const updatedParameters = Object.entries(parameters).map((item) => {
@@ -74,9 +75,7 @@ function TSNotebookViewer({ nbSlug, userParameters }) {
           <p>Status: {status}</p>
         </NotebookSettingsContainer>
         <NotebookPageContainer>
-          <iframe
-            src={`/times-square/api/v1/pages/${nbSlug}/html?${updatedQS}`}
-          ></iframe>
+          <iframe src={`${htmlApiUrl}?${updatedQS}`}></iframe>
         </NotebookPageContainer>
       </NotebookViewLayout>
     );

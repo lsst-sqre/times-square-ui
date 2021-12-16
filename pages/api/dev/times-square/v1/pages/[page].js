@@ -1,9 +1,13 @@
 /*
  * Mock Times Square API endpoint: /times-square/v1/pages/:page
  */
+import getConfig from 'next/config';
 
 export default function handler(req, res) {
   const { page } = req.query;
+  const { publicRuntimeConfig } = getConfig();
+  const { timesSquareApiUrl } = publicRuntimeConfig;
+  const pageBaseUrl = `${timesSquareApiUrl}pages/${page}`;
 
   if (page == 'not-found') {
     // simulate a page that doesn't exist in the backend
@@ -14,10 +18,10 @@ export default function handler(req, res) {
 
   const content = {
     name: page,
-    self_url: `${req.url}`,
-    source_url: `${req.url}/source`,
-    rendered_url: `${req.url}/rendered`,
-    html_url: `${req.url}/html`,
+    self_url: pageBaseUrl,
+    source_url: `${pageBaseUrl}/source`,
+    rendered_url: `${pageBaseUrl}/rendered`,
+    html_url: `${pageBaseUrl}/html`,
     parameters: {
       a: {
         type: 'number',
@@ -33,6 +37,6 @@ export default function handler(req, res) {
   };
 
   res.statusCode = 200;
-  res.setHeader('Content-Type', 'applicaiton/json');
+  res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(content));
 }
