@@ -20,6 +20,7 @@ const htmlContent = `
 
 export default function handler(req, res) {
   const { page } = req.query;
+  console.log(req.url);
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/html');

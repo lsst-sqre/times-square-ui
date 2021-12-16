@@ -53,6 +53,10 @@ module.exports = (phase, { defaultConfig }) => {
           source: '/api/v1/pages/:page/html',
           destination: '/api/dev/times-square/v1/pages/:page/html',
         },
+        {
+          source: '/api/v1/pages/:page',
+          destination: '/api/dev/times-square/v1/pages/:page',
+        },
       ];
     },
   };
