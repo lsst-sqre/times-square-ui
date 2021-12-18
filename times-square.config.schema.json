@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "times-square.config.schema.json",
+  "title": "Times Square Configuration",
+  "description": "Schema for the public (client and server-side) YAML configuration for a Times Square instance.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "siteName": {
+      "type": "string",
+      "default": "RSP Pages",
+      "title": "Site name",
+      "description": "Used as the basis of the HTML title tag. This should be customized for each science platform deployment."
+    },
+    "siteDescription": {
+      "type": "string",
+      "default": "RSP Pages are generated on the fly from Jupyter notebooks.",
+      "title": "Site description",
+      "description": "Used as the default site description in the HTML meta.."
+    },
+    "baseUrl": {
+      "type": "string",
+      "default": "http://localhost:3001",
+      "title": "Base URL for the public ingress",
+      "description": "Used for computing absolute URLs"
+    },
+    "semaphoreUrl": {
+      "type": "string",
+      "title": "Semaphore URL",
+      "description": "URL of the Semaphore API service for obtaining notifications and broadcasts"
+    },
+    "timesSquareApiUrl": {
+      "type": "string",
+      "title": "Times Square API URL",
+      "description": "URL of the Times Square API service."
+    }
+  }
+}
