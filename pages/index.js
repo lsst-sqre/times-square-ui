@@ -5,7 +5,7 @@ import Link from 'next/link';
 function HomePage() {
   const { publicRuntimeConfig } = getConfig();
   const { timesSquareApiUrl } = publicRuntimeConfig;
-  const pagesDataUrl = `${timesSquareApiUrl}pages`;
+  const pagesDataUrl = `${timesSquareApiUrl}/v1/pages`;
   const { status, error, data } = useFetch(pagesDataUrl);
 
   if (status == 'fetched') {

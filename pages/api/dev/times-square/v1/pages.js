@@ -11,7 +11,7 @@ export default function handler(req, res) {
   const { timesSquareApiUrl } = publicRuntimeConfig;
 
   const createPage = (name) => {
-    const pageBaseUrl = `${timesSquareApiUrl}pages/${name}`;
+    const pageBaseUrl = `${timesSquareApiUrl}/v1/pages/${name}`;
     return {
       name,
       self_url: pageBaseUrl,

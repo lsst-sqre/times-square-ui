@@ -36,7 +36,7 @@ function TSNotebookViewer({ nbSlug, userParameters }) {
   // Get data about the page itself
   const { publicRuntimeConfig } = getConfig();
   const { timesSquareApiUrl } = publicRuntimeConfig;
-  const pageDataUrl = `${timesSquareApiUrl}pages/${nbSlug}`;
+  const pageDataUrl = `${timesSquareApiUrl}/v1/pages/${nbSlug}`;
   const { status, error, data } = useFetch(pageDataUrl);
 
   if (status === 'fetched') {
