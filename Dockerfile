@@ -22,6 +22,10 @@ FROM node:16-alpine as builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN cp --remove-destination "$(readlink ./public/operations-lineup-block.png)" ./public/operations-lineup-block.png
+RUN cp --remove-destination "$(readlink ./public/rubin-favicon-transparent-32px.png)" ./public/rubin-favicon-transparent-32px.png
+RUN cp --remove-destination "$(readlink ./public/rubin-imagotype-color-on-black.png)" ./public/rubin-imagotype-color-on-block.png
+RUN cp --remove-destination "$(readlink ./public/rubin-imagotype-color-on-black.svg)" ./public/rubin-imagotype-color-on-block.svg
 RUN npm run build
 
 # Stage 3: Install pre-built app and deps for production ======================
