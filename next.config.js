@@ -68,5 +68,6 @@ module.exports = (phase, { defaultConfig }) => {
       ];
     },
   };
+  console.log(config);
   return config;
 };
