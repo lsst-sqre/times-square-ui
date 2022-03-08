@@ -17,18 +17,12 @@ RUN echo "//npm.pkg.github.com/:_authToken=${GH_PKG_TOKEN}" > ~/.npmrc
 COPY package.json package-lock.json .npmrc ./
 RUN npm ci
 
-RUN ls node_modules
 
 # Stage 2: Build application ==================================================
 FROM node:16-alpine as builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-WORKDIR /app/public
-# RUN cp --remove-destination "$(readlink ./operations-lineup-block.png)" ./operations-lineup-block.png
-# RUN cp --remove-destination "$(readlink ./rubin-favicon-transparent-32px.png)" ./rubin-favicon-transparent-32px.png
-# RUN cp --remove-destination "$(readlink ./rubin-imagotype-color-on-black.png)" ./rubin-imagotype-color-on-block.png
-# RUN cp --remove-destination "$(readlink ./rubin-imagotype-color-on-black.svg)" ./rubin-imagotype-color-on-block.svg
 RUN npm run build
 
 # Stage 3: Install pre-built app and deps for production ======================
@@ -42,15 +36,12 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.next ./next
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/times-square.config.schema.json ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
@@ -58,6 +49,3 @@ EXPOSE 3000
 ENV PORT 3000
 
 CMD ["npm", "run start"]
-# server.js comes from .next/standalone via output file tracing
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-CMD ["node", "server.js"]
