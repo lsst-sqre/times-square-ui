@@ -37,7 +37,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.next ./next
+COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/times-square.config.schema.json ./
 COPY --from=builder /app/public ./public
@@ -48,4 +48,4 @@ USER nextjs
 EXPOSE 3000
 ENV PORT 3000
 
-CMD ["npm", "run start"]
+CMD ["node_modules/.bin/next", "start"]
