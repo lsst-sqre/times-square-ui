@@ -44,6 +44,10 @@ module.exports = (phase, { defaultConfig }) => {
       ...publicYamlConfig,
       basePath,
     },
+    // experimental: {
+    //   // https://nextjs.org/docs/advanced-features/output-file-tracing
+    //   outputStandalone: true,
+    // },
     async rewrites() {
       // For both the source and destination, don't include the basePath
       // prefix for internal (same host) paths; next will apply it
@@ -64,5 +68,6 @@ module.exports = (phase, { defaultConfig }) => {
       ];
     },
   };
+  console.log(config);
   return config;
 };

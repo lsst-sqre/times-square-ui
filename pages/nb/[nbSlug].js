@@ -9,6 +9,8 @@ const NotebookViewLayout = styled.div`
   display: flex;
   flex-direction: row;
   min-width: 100%;
+  // FIXME need a more reliable of making the viewer use all whitespace
+  height: calc(100vh - 200px);
 `;
 
 const NotebookSettingsContainer = styled.div`
@@ -29,6 +31,7 @@ const NotebookPageContainer = styled.div`
     border: 0px solid black;
     box-shadow: var(--shadow-elevation-medium);
     width: 100%;
+    height: 100%;
   }
 `;
 
@@ -36,12 +39,11 @@ function TSNotebookViewer({ nbSlug, userParameters }) {
   // Get data about the page itself
   const { publicRuntimeConfig } = getConfig();
   const { timesSquareApiUrl } = publicRuntimeConfig;
-  const pageDataUrl = `${timesSquareApiUrl}pages/${nbSlug}`;
+  const pageDataUrl = `${timesSquareApiUrl}/v1/pages/${nbSlug}`;
   const { status, error, data } = useFetch(pageDataUrl);
 
   if (status === 'fetched') {
     const { parameters, html_url: htmlApiUrl } = data;
-    console.log(htmlApiUrl);
 
     // Merge user-set parameters with defaults
     const updatedParameters = Object.entries(parameters).map((item) => {

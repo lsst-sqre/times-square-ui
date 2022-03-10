@@ -7,7 +7,7 @@ export default function handler(req, res) {
   const { page } = req.query;
   const { publicRuntimeConfig } = getConfig();
   const { timesSquareApiUrl } = publicRuntimeConfig;
-  const pageBaseUrl = `${timesSquareApiUrl}pages/${page}`;
+  const pageBaseUrl = `${timesSquareApiUrl}/v1/pages/${page}`;
 
   if (page == 'not-found') {
     // simulate a page that doesn't exist in the backend
