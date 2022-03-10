@@ -15,27 +15,10 @@ export default function handler(req, res) {
     return {
       name,
       self_url: pageBaseUrl,
-      source_url: `${pageBaseUrl}/source`,
-      rendered_url: `${pageBaseUrl}/rendered`,
-      html_url: `${pageBaseUrl}/html`,
-      parameters: {
-        a: {
-          type: 'number',
-          default: 42,
-          description: 'A number.',
-        },
-        b: {
-          type: 'string',
-          default: 'Hello',
-          description: 'A string.',
-        },
-      },
     };
   };
 
-  const content = {
-    data: [createPage('mypage'), createPage('anotherpage')],
-  };
+  const content = [createPage('mypage'), createPage('anotherpage')];
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');

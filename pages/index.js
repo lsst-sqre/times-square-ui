@@ -2,15 +2,13 @@ import { useFetch } from '../hooks/fetch';
 import getConfig from 'next/config';
 import Link from 'next/link';
 
-function HomePage() {
-  const { publicRuntimeConfig } = getConfig();
+function HomePage({ publicRuntimeConfig }) {
   const { timesSquareApiUrl } = publicRuntimeConfig;
   const pagesDataUrl = `${timesSquareApiUrl}/v1/pages`;
-  const { status, error, data } = useFetch(pagesDataUrl);
+
+  const { status, error, data: pageResources } = useFetch(pagesDataUrl);
 
   if (status == 'fetched') {
-    const { data: pageResources } = data;
-
     return (
       <>
         <h1>Times Square</h1>
@@ -32,5 +30,11 @@ function HomePage() {
     return <div>Loading...</div>;
   }
 }
+
+HomePage.getInitialProps = async ({}) => {
+  // use getInitialProps to ensure the page isn't statically rendered
+  const { publicRuntimeConfig } = getConfig();
+  return { publicRuntimeConfig };
+};
 
 export default HomePage;

@@ -41,7 +41,6 @@ function TSNotebookViewer({ nbSlug, userParameters }) {
 
   if (status === 'fetched') {
     const { parameters, html_url: htmlApiUrl } = data;
-    console.log(htmlApiUrl);
 
     // Merge user-set parameters with defaults
     const updatedParameters = Object.entries(parameters).map((item) => {
