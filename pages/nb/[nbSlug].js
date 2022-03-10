@@ -9,6 +9,8 @@ const NotebookViewLayout = styled.div`
   display: flex;
   flex-direction: row;
   min-width: 100%;
+  // FIXME need a more reliable of making the viewer use all whitespace
+  height: calc(100vh - 200px);
 `;
 
 const NotebookSettingsContainer = styled.div`
@@ -29,6 +31,7 @@ const NotebookPageContainer = styled.div`
     border: 0px solid black;
     box-shadow: var(--shadow-elevation-medium);
     width: 100%;
+    height: 100%;
   }
 `;
 
