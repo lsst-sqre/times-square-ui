@@ -4,6 +4,7 @@ import getConfig from 'next/config';
 
 import { withRouter, useRouter } from '../../hooks/useRouter';
 import { useFetch } from '../../hooks/fetch';
+import NotebookIframe from '../../components/notebookIframe';
 
 const NotebookViewLayout = styled.div`
   display: flex;
@@ -77,7 +78,10 @@ function TSNotebookViewer({ nbSlug, userParameters }) {
           <p>Status: {status}</p>
         </NotebookSettingsContainer>
         <NotebookPageContainer>
-          <iframe src={`${htmlApiUrl}?${updatedQS}`}></iframe>
+          <NotebookIframe
+            tsHtmlUrl={htmlApiUrl}
+            parameters={updatedParameters}
+          />
         </NotebookPageContainer>
       </NotebookViewLayout>
     );
