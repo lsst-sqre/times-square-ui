@@ -5,6 +5,8 @@
 
 import styled from 'styled-components';
 
+import useHtmlStatus from '../hooks/htmlStatus';
+
 const StyledIframe = styled.iframe`
   --shadow-color: 0deg 0% 74%;
   --shadow-elevation-medium: 0.1px 0.7px 0.9px hsl(var(--shadow-color) / 0.16),
@@ -17,14 +19,36 @@ const StyledIframe = styled.iframe`
   height: 100%;
 `;
 
-export default function NotebookIframeContainer({ tsHtmlUrl, parameters }) {
-  // query string with parameters for requesting the corresponding
-  // notebook HTML render
-  const updatedQS = parameters
-    .map(
-      (item) => `${encodeURIComponent(item[0])}=${encodeURIComponent(item[1])}`
-    )
-    .join('&');
+export default function NotebookIframe({
+  tsHtmlUrl,
+  tsHtmlStatusUrl,
+  parameters,
+}) {
+  const htmlUrl = new URL(tsHtmlUrl);
+  parameters.forEach((item) => htmlUrl.searchParams.set(item[0], item[1]));
 
-  return <StyledIframe src={`${tsHtmlUrl}?${updatedQS}`}></StyledIframe>;
+  const htmlStatus = useHtmlStatus(tsHtmlStatusUrl, parameters);
+
+  if (htmlStatus.error) {
+    return (
+      <div>
+        <p>Error contacting API at {`${tsHtmlStatusUrl}`}</p>
+      </div>
+    );
+  }
+
+  if (htmlStatus.loading) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  return (
+    <StyledIframe
+      src={htmlStatus.htmlUrl || htmlUrl.toString()}
+      key={htmlStatus.iframeKey}
+    ></StyledIframe>
+  );
 }

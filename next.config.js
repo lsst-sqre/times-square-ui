@@ -62,6 +62,10 @@ module.exports = (phase, { defaultConfig }) => {
           destination: '/api/dev/times-square/v1/pages/:page/html',
         },
         {
+          source: '/api/v1/pages/:page/htmlstatus',
+          destination: '/api/dev/times-square/v1/pages/:page/htmlstatus',
+        },
+        {
           source: '/api/v1/pages/:page',
           destination: '/api/dev/times-square/v1/pages/:page',
         },
