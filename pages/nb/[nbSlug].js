@@ -4,6 +4,7 @@ import getConfig from 'next/config';
 
 import { withRouter, useRouter } from '../../hooks/useRouter';
 import { useFetch } from '../../hooks/fetch';
+import NotebookIframe from '../../components/notebookIframe';
 
 const NotebookViewLayout = styled.div`
   display: flex;
@@ -43,7 +44,11 @@ function TSNotebookViewer({ nbSlug, userParameters }) {
   const { status, error, data } = useFetch(pageDataUrl);
 
   if (status === 'fetched') {
-    const { parameters, html_url: htmlApiUrl } = data;
+    const {
+      parameters,
+      html_url: htmlApiUrl,
+      html_status_url: htmlStatusApiUrl,
+    } = data;
 
     // Merge user-set parameters with defaults
     const updatedParameters = Object.entries(parameters).map((item) => {
@@ -59,15 +64,6 @@ function TSNotebookViewer({ nbSlug, userParameters }) {
       <li key={item[0]}>{`${item[0]}: ${item[1]}`}</li>
     ));
 
-    // query string with parameters for requesting the corresponding
-    // notebook HTML render
-    const updatedQS = updatedParameters
-      .map(
-        (item) =>
-          `${encodeURIComponent(item[0])}=${encodeURIComponent(item[1])}`
-      )
-      .join('&');
-
     return (
       <NotebookViewLayout>
         <NotebookSettingsContainer>
@@ -77,7 +73,11 @@ function TSNotebookViewer({ nbSlug, userParameters }) {
           <p>Status: {status}</p>
         </NotebookSettingsContainer>
         <NotebookPageContainer>
-          <iframe src={`${htmlApiUrl}?${updatedQS}`}></iframe>
+          <NotebookIframe
+            tsHtmlUrl={htmlApiUrl}
+            tsHtmlStatusUrl={htmlStatusApiUrl}
+            parameters={updatedParameters}
+          />
         </NotebookPageContainer>
       </NotebookViewLayout>
     );

@@ -22,6 +22,7 @@ export default function handler(req, res) {
     source_url: `${pageBaseUrl}/source`,
     rendered_url: `${pageBaseUrl}/rendered`,
     html_url: `${pageBaseUrl}/html`,
+    html_status_url: `${pageBaseUrl}/htmlstatus`,
     parameters: {
       a: {
         type: 'number',
