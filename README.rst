@@ -2,9 +2,9 @@
 
 ****
 
-###########################
-Times Square UI [archiveed]
-###########################
+##########################
+Times Square UI [archived]
+##########################
 
 **The front-end web interface for Times Square, a Rubin Science Platform (RSP) service for displaying parameterized Jupyter Notebooks as websites.**
 
